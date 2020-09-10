@@ -1,5 +1,10 @@
 import React from 'react'
+
+
+
 const OneCountry = ({one}) => {
+
+    
     return (
         <div>
             

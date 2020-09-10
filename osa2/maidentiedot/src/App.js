@@ -3,6 +3,7 @@ import axios from 'axios'
 import Country from './components/Country'
 import OneCountry from './components/OneCountry'
 
+
 function App() {
   const [countries, setCountries] = useState([])
   const [countryFilter, setCountryFilter] = useState('')
@@ -12,7 +13,7 @@ function App() {
   let alert = ""
 
   const hook = () => {
-    console.log('effect')
+    console.log('countries api')
     axios
       .get('https://restcountries.eu/rest/v2/all')
       .then(response => {
@@ -21,6 +22,9 @@ function App() {
       })
   }
   useEffect(hook, [])
+
+
+
 
   const handleSearch = (event) =>{
     //every change in search bar sets boolean false 
@@ -43,19 +47,30 @@ function App() {
   }
  //additional info shown if length of array is 1 and filter boolean is false
   if(countriesToShow.length === 1 && filterBool === false){
+
+   
     console.log("one country detected")
     setBool(true)
     setCountry(countriesToShow)
     console.log(countriesToShow)
     alert = []
   }
+
+
+  const showOneCountry = (maa) =>{
+    console.log('inside one country')
+    setCountry([maa])
+
+  }
+  console.log(country)
   
   return (
     <div>
       find countries: <input onChange={handleSearch}/>
       {countriesToShow.map((country, i) =>
-      <Country key={i} country={country}/>
+      <Country key={i} country={country} showOneCountry={showOneCountry}/>
       )}
+  
       <div>{alert}</div>
       <div>
         {country.map((one, i) =>
